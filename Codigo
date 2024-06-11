@@ -1,0 +1,100 @@
+import RPi.GPIO as GPIO
+import time
+
+PIN_LED_VERMELHO_1 = 17
+PIN_LED_VERMELHO_2 = 27
+PIN_LED_VERMELHO_3 = 22
+PIN_LED_VERMELHO_4 = 23
+PIN_LED_VERDE = 24
+PIN_LED_AZUL = 25
+PIN_BOTAO = 18
+PIN_BUZZER = 3
+
+def configurar_gpio():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    
+    GPIO.setup(PIN_LED_VERMELHO_1, GPIO.OUT)
+    GPIO.setup(PIN_LED_VERMELHO_2, GPIO.OUT)
+    GPIO.setup(PIN_LED_VERMELHO_3, GPIO.OUT)
+    GPIO.setup(PIN_LED_VERMELHO_4, GPIO.OUT)
+    
+    GPIO.setup(PIN_LED_VERDE, GPIO.OUT)
+    GPIO.setup(PIN_LED_AZUL, GPIO.OUT)
+    
+    GPIO.setup(PIN_BOTAO, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def acender_led(pino):
+    GPIO.output(pino, GPIO.HIGH)
+
+def apagar_led(pino):
+    GPIO.output(pino, GPIO.LOW)
+
+def ciclo_de_trabalho(quantidade_leds):
+    if quantidade_leds >= 1:
+        acender_led(PIN_LED_VERMELHO_1)
+    if quantidade_leds >= 2:
+        acender_led(PIN_LED_VERMELHO_2)
+    if quantidade_leds >= 3:
+        acender_led(PIN_LED_VERMELHO_3)
+    if quantidade_leds >= 4:
+        acender_led(PIN_LED_VERMELHO_4)
+
+    time.sleep(1500)
+
+    if quantidade_leds >= 1:
+        apagar_led(PIN_LED_VERMELHO_1)
+    if quantidade_leds >= 2:
+        apagar_led(PIN_LED_VERMELHO_2)
+    if quantidade_leds >= 3:
+        apagar_led(PIN_LED_VERMELHO_3)
+    if quantidade_leds >= 4:
+        apagar_led(PIN_LED_VERMELHO_4)
+
+def ciclo_de_pausa():
+    acender_led(PIN_LED_VERDE)
+    time.sleep(300)
+    apagar_led(PIN_LED_VERDE)
+
+def ciclo_final():
+    acender_led(PIN_LED_AZUL)
+    time.sleep(10)
+    apagar_led(PIN_LED_AZUL)
+
+def main():
+    try:
+        configurar_gpio()
+
+        while True:
+            input("Pressione Enter para iniciar o ciclo de trabalho...")
+
+            ciclo_de_trabalho(1)
+            ciclo_de_pausa()
+
+            input("Pressione Enter para iniciar o próximo ciclo de trabalho...")
+
+            ciclo_de_trabalho(2)
+            ciclo_de_pausa()
+
+            input("Pressione Enter para iniciar o próximo ciclo de trabalho...")
+
+            ciclo_de_trabalho(3)
+            ciclo_de_pausa()
+
+            input("Pressione Enter para iniciar o próximo ciclo de trabalho...")
+
+            ciclo_de_trabalho(4)
+            ciclo_de_pausa()
+
+            ciclo_final()
+
+            print("Ciclo Pomodoro completo. Pressione Enter para reiniciar...")
+            input()
+
+    except KeyboardInterrupt:
+        print("Programa interrompido")
+    finally:
+        GPIO.cleanup()
+
+if _name_ == "_main_":
+    main()
