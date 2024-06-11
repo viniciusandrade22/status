@@ -28,3 +28,7 @@ Após quatro ciclos de trabalho, todos os LEDs vermelhos se apagam, e o LED azul
 ![0c329425-8afe-4067-89f0-18484229d905](https://github.com/viniciusandrade22/projeto/assets/169168042/7db8dc4e-4bca-48c7-babc-4e76363b6304)
 
 ![ab37506b-07ad-4a71-9eac-c4d716292e2b](https://github.com/viniciusandrade22/projeto/assets/169168042/ad6377d8-25e0-4077-915e-6a6954508db6)
+
+
+https://github.com/viniciusandrade22/status/assets/169168042/47ee3bd5-ac18-40f8-a35d-deb0312cbe9d
+
